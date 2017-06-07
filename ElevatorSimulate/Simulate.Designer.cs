@@ -1,6 +1,6 @@
 ﻿namespace ElevatorSimulate
 {
-    partial class Form1
+    partial class Simulate
     {
         /// <summary>
         /// 必需的设计器变量。

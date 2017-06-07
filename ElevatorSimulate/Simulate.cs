@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ElevatorSimulate
 {
-    public partial class Form1 : Form
+    public partial class Simulate : Form
     {
-        public Form1()
+        public Simulate()
         {
             InitializeComponent();
         }
