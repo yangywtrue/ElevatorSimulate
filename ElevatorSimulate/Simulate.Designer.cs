@@ -31,10 +31,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbBasic = new System.Windows.Forms.GroupBox();
-            this.txtDeviceCode = new System.Windows.Forms.TextBox();
-            this.lblDeviceCode = new System.Windows.Forms.Label();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnStart = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.txtIp = new System.Windows.Forms.TextBox();
             this.lblServerAddress = new System.Windows.Forms.Label();
@@ -52,10 +49,15 @@
             this.btnFloor1 = new System.Windows.Forms.Button();
             this.cbDeviceCode = new System.Windows.Forms.ComboBox();
             this.lblDeviceSelect = new System.Windows.Forms.Label();
-            this.gbMessage = new System.Windows.Forms.GroupBox();
-            this.txtMsg = new System.Windows.Forms.RichTextBox();
             this.gbStatus = new System.Windows.Forms.GroupBox();
             this.gridStatus = new System.Windows.Forms.DataGridView();
+            this.gbElevatorInit = new System.Windows.Forms.GroupBox();
+            this.txtDeviceCode = new System.Windows.Forms.TextBox();
+            this.lblDeviceCode = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.gbMessage = new System.Windows.Forms.GroupBox();
+            this.richTextMsg = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -63,9 +65,10 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.gbBasic.SuspendLayout();
             this.gbOperation.SuspendLayout();
-            this.gbMessage.SuspendLayout();
             this.gbStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridStatus)).BeginInit();
+            this.gbElevatorInit.SuspendLayout();
+            this.gbMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -90,68 +93,43 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.gbBasic, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gbOperation, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.gbStatus, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.gbOperation, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.gbStatus, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.gbElevatorInit, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.55401F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.44599F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 312F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.27273F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.72727F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 156F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 267F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(383, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gbBasic
             // 
-            this.gbBasic.Controls.Add(this.txtDeviceCode);
-            this.gbBasic.Controls.Add(this.lblDeviceCode);
-            this.gbBasic.Controls.Add(this.btnStop);
-            this.gbBasic.Controls.Add(this.btnStart);
+            this.gbBasic.Controls.Add(this.btnConnect);
             this.gbBasic.Controls.Add(this.txtPort);
             this.gbBasic.Controls.Add(this.txtIp);
             this.gbBasic.Controls.Add(this.lblServerAddress);
             this.gbBasic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbBasic.Location = new System.Drawing.Point(3, 3);
             this.gbBasic.Name = "gbBasic";
-            this.gbBasic.Size = new System.Drawing.Size(377, 119);
+            this.gbBasic.Size = new System.Drawing.Size(377, 86);
             this.gbBasic.TabIndex = 0;
             this.gbBasic.TabStop = false;
             this.gbBasic.Text = "基本配置";
             // 
-            // txtDeviceCode
+            // btnConnect
             // 
-            this.txtDeviceCode.Location = new System.Drawing.Point(106, 56);
-            this.txtDeviceCode.Name = "txtDeviceCode";
-            this.txtDeviceCode.Size = new System.Drawing.Size(247, 21);
-            this.txtDeviceCode.TabIndex = 6;
-            // 
-            // lblDeviceCode
-            // 
-            this.lblDeviceCode.AutoSize = true;
-            this.lblDeviceCode.Location = new System.Drawing.Point(20, 59);
-            this.lblDeviceCode.Name = "lblDeviceCode";
-            this.lblDeviceCode.Size = new System.Drawing.Size(59, 12);
-            this.lblDeviceCode.TabIndex = 5;
-            this.lblDeviceCode.Text = "设备编码:";
-            // 
-            // btnStop
-            // 
-            this.btnStop.Location = new System.Drawing.Point(197, 85);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(156, 23);
-            this.btnStop.TabIndex = 4;
-            this.btnStop.Text = "停止";
-            this.btnStop.UseVisualStyleBackColor = true;
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(22, 85);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(156, 23);
-            this.btnStart.TabIndex = 3;
-            this.btnStart.Text = "启动";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnConnect.Location = new System.Drawing.Point(22, 54);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(331, 23);
+            this.btnConnect.TabIndex = 3;
+            this.btnConnect.Text = "创建连接";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // txtPort
             // 
@@ -159,7 +137,7 @@
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(49, 21);
             this.txtPort.TabIndex = 2;
-            this.txtPort.Text = "9100";
+            this.txtPort.Text = "7100";
             // 
             // txtIp
             // 
@@ -193,9 +171,9 @@
             this.gbOperation.Controls.Add(this.cbDeviceCode);
             this.gbOperation.Controls.Add(this.lblDeviceSelect);
             this.gbOperation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbOperation.Location = new System.Drawing.Point(3, 128);
+            this.gbOperation.Location = new System.Drawing.Point(3, 179);
             this.gbOperation.Name = "gbOperation";
-            this.gbOperation.Size = new System.Drawing.Size(377, 156);
+            this.gbOperation.Size = new System.Drawing.Size(377, 150);
             this.gbOperation.TabIndex = 1;
             this.gbOperation.TabStop = false;
             this.gbOperation.Text = "电梯操作";
@@ -317,37 +295,13 @@
             this.lblDeviceSelect.TabIndex = 0;
             this.lblDeviceSelect.Text = "设备编码:";
             // 
-            // gbMessage
-            // 
-            this.gbMessage.BackColor = System.Drawing.Color.Transparent;
-            this.gbMessage.Controls.Add(this.txtMsg);
-            this.gbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbMessage.ForeColor = System.Drawing.Color.Blue;
-            this.gbMessage.Location = new System.Drawing.Point(0, 0);
-            this.gbMessage.Name = "gbMessage";
-            this.gbMessage.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
-            this.gbMessage.Size = new System.Drawing.Size(432, 600);
-            this.gbMessage.TabIndex = 0;
-            this.gbMessage.TabStop = false;
-            this.gbMessage.Text = "信息日志";
-            // 
-            // txtMsg
-            // 
-            this.txtMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMsg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMsg.Location = new System.Drawing.Point(5, 17);
-            this.txtMsg.Name = "txtMsg";
-            this.txtMsg.Size = new System.Drawing.Size(422, 578);
-            this.txtMsg.TabIndex = 1;
-            this.txtMsg.Text = "";
-            // 
             // gbStatus
             // 
             this.gbStatus.Controls.Add(this.gridStatus);
             this.gbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbStatus.Location = new System.Drawing.Point(3, 290);
+            this.gbStatus.Location = new System.Drawing.Point(3, 335);
             this.gbStatus.Name = "gbStatus";
-            this.gbStatus.Size = new System.Drawing.Size(377, 307);
+            this.gbStatus.Size = new System.Drawing.Size(377, 262);
             this.gbStatus.TabIndex = 2;
             this.gbStatus.TabStop = false;
             this.gbStatus.Text = "状态";
@@ -359,17 +313,93 @@
             this.gridStatus.Location = new System.Drawing.Point(3, 17);
             this.gridStatus.Name = "gridStatus";
             this.gridStatus.RowTemplate.Height = 23;
-            this.gridStatus.Size = new System.Drawing.Size(371, 287);
+            this.gridStatus.Size = new System.Drawing.Size(371, 242);
             this.gridStatus.TabIndex = 0;
             // 
-            // Form1
+            // gbElevatorInit
+            // 
+            this.gbElevatorInit.Controls.Add(this.txtDeviceCode);
+            this.gbElevatorInit.Controls.Add(this.lblDeviceCode);
+            this.gbElevatorInit.Controls.Add(this.btnStop);
+            this.gbElevatorInit.Controls.Add(this.btnStart);
+            this.gbElevatorInit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbElevatorInit.Location = new System.Drawing.Point(3, 95);
+            this.gbElevatorInit.Name = "gbElevatorInit";
+            this.gbElevatorInit.Size = new System.Drawing.Size(377, 78);
+            this.gbElevatorInit.TabIndex = 3;
+            this.gbElevatorInit.TabStop = false;
+            this.gbElevatorInit.Text = "初始化";
+            // 
+            // txtDeviceCode
+            // 
+            this.txtDeviceCode.Location = new System.Drawing.Point(106, 20);
+            this.txtDeviceCode.Name = "txtDeviceCode";
+            this.txtDeviceCode.Size = new System.Drawing.Size(247, 21);
+            this.txtDeviceCode.TabIndex = 10;
+            this.txtDeviceCode.Text = "1";
+            // 
+            // lblDeviceCode
+            // 
+            this.lblDeviceCode.AutoSize = true;
+            this.lblDeviceCode.Location = new System.Drawing.Point(20, 23);
+            this.lblDeviceCode.Name = "lblDeviceCode";
+            this.lblDeviceCode.Size = new System.Drawing.Size(59, 12);
+            this.lblDeviceCode.TabIndex = 9;
+            this.lblDeviceCode.Text = "设备编码:";
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(197, 49);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(156, 23);
+            this.btnStop.TabIndex = 8;
+            this.btnStop.Text = "停止";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(22, 49);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(156, 23);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.Text = "启动";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // gbMessage
+            // 
+            this.gbMessage.BackColor = System.Drawing.Color.Transparent;
+            this.gbMessage.Controls.Add(this.richTextMsg);
+            this.gbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbMessage.ForeColor = System.Drawing.Color.Blue;
+            this.gbMessage.Location = new System.Drawing.Point(0, 0);
+            this.gbMessage.Name = "gbMessage";
+            this.gbMessage.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
+            this.gbMessage.Size = new System.Drawing.Size(432, 600);
+            this.gbMessage.TabIndex = 0;
+            this.gbMessage.TabStop = false;
+            this.gbMessage.Text = "信息日志";
+            // 
+            // richTextMsg
+            // 
+            this.richTextMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextMsg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextMsg.Location = new System.Drawing.Point(5, 17);
+            this.richTextMsg.Name = "richTextMsg";
+            this.richTextMsg.Size = new System.Drawing.Size(422, 578);
+            this.richTextMsg.TabIndex = 1;
+            this.richTextMsg.Text = "";
+            // 
+            // Simulate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 600);
             this.Controls.Add(this.splitContainer);
-            this.Name = "Form1";
+            this.Name = "Simulate";
             this.Text = "电梯模拟器";
+            this.Load += new System.EventHandler(this.Simulate_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
@@ -379,9 +409,11 @@
             this.gbBasic.PerformLayout();
             this.gbOperation.ResumeLayout(false);
             this.gbOperation.PerformLayout();
-            this.gbMessage.ResumeLayout(false);
             this.gbStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridStatus)).EndInit();
+            this.gbElevatorInit.ResumeLayout(false);
+            this.gbElevatorInit.PerformLayout();
+            this.gbMessage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -391,12 +423,8 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbMessage;
-        private System.Windows.Forms.RichTextBox txtMsg;
+        private System.Windows.Forms.RichTextBox richTextMsg;
         private System.Windows.Forms.GroupBox gbBasic;
-        private System.Windows.Forms.TextBox txtDeviceCode;
-        private System.Windows.Forms.Label lblDeviceCode;
-        private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtIp;
         private System.Windows.Forms.Label lblServerAddress;
@@ -416,6 +444,12 @@
         private System.Windows.Forms.Label lblDeviceSelect;
         private System.Windows.Forms.GroupBox gbStatus;
         private System.Windows.Forms.DataGridView gridStatus;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.GroupBox gbElevatorInit;
+        private System.Windows.Forms.TextBox txtDeviceCode;
+        private System.Windows.Forms.Label lblDeviceCode;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStart;
     }
 }
 
