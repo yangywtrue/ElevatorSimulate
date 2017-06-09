@@ -83,6 +83,7 @@ namespace Controller
         public override void Process(string t)
         {
             LogReceMsg(t);
+
             return;
         }
 
