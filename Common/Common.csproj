@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Receiver.cs" />
+    <Compile Include="Base\TaskQueue.cs" />
     <Compile Include="Enum\ElevatorEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

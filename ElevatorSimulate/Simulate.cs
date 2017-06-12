@@ -1,4 +1,5 @@
-﻿using Connection;
+﻿using Common.Enum;
+using Connection;
 using Controller;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utility;
 
 namespace ElevatorSimulate
-{
+{  
     public partial class Simulate : Form
     {
         private SocketConn connect;
@@ -25,6 +27,8 @@ namespace ElevatorSimulate
         private void Simulate_Load(object sender, EventArgs e)
         {
             this.txtIp.Text = NetworkHelper.GetLocalIP();
+
+            RefreshGridView();
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -90,6 +94,7 @@ namespace ElevatorSimulate
 
             VMIController controller = new VMIController(code);
             this.elevators.Add(controller);
+            controller.onSendMessage += this.connect.Send;
             controller.onLogInfo += onLogInfo;
             this.connect.onReceiveMessage += controller.Receive;
 
@@ -105,6 +110,7 @@ namespace ElevatorSimulate
                 return;
             }
             VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            this.connect.onReceiveMessage -= controller.Receive;
             this.elevators.Remove(controller);
 
             BindDeviceCode();
@@ -146,6 +152,160 @@ namespace ElevatorSimulate
             }
             catch
             {
+            }
+        }
+
+        private void btnFloor1_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.GoToFloor(1);
+        }
+
+        private void btnFloor2_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.GoToFloor(2);
+
+        }
+
+        private void btnFloor3_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.GoToFloor(3);
+        }
+
+        private void btnFloor4_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.GoToFloor(4);
+        }
+
+        private void btnOpenDoor_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.OpenDoor();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.CloseDoor();
+        }
+
+        private void btnExceptionOn_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.SetException(true);
+        }
+
+        private void btnExceptionOff_Click(object sender, EventArgs e)
+        {
+            string code = this.cbDeviceCode.SelectedValue.ToString();
+            VMIController controller = this.elevators.Where(el => el.DeviceCode == code).FirstOrDefault();
+            controller.SetException(false);
+        }
+
+        private void RefreshGridView()
+        {
+            Task taskRefreshStatus = new Task(() =>
+            {
+                while (true)
+                {
+                    BindGridView();
+                    Thread.Sleep(500);
+                }
+            }, TaskCreationOptions.LongRunning);
+            taskRefreshStatus.Start();
+        }
+
+        private void BindGridView()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("DeviceCode");
+            dt.Columns.Add("CurrentFloor");
+            dt.Columns.Add("RunningDirction");
+            dt.Columns.Add("DoorStatus");
+            dt.Columns.Add("HasException");
+
+            foreach (VMIController el in elevators)
+            {
+                DataRow dr = dt.NewRow();
+                dr["DeviceCode"] = el.DeviceCode;
+                dr["CurrentFloor"] = el.CurrentFloor;
+
+                string temp = "未知";
+                switch (el.RunningDirection)
+                {
+                    case ElevatorDirectionEnum.Unknown:
+                        break;
+                    case ElevatorDirectionEnum.Up:
+                        temp = "向上";
+                        break;
+                    case ElevatorDirectionEnum.Down:
+                        temp = "向下";
+                        break;
+                    case ElevatorDirectionEnum.Stop:
+                        temp = "停止";
+                        break;
+                    default:
+                        break;
+                }
+                dr["RunningDirction"] = temp;
+
+                temp = "未知";
+                switch (el.DoorStatus)
+                {
+                    case ElevatorDoorStatusEnum.Unknown:
+                        break;
+                    case ElevatorDoorStatusEnum.Opened:
+                        temp = "已开门";
+                        break;
+                    case ElevatorDoorStatusEnum.Closed:
+                        temp = "已关门";
+                        break;
+                    case ElevatorDoorStatusEnum.Opening:
+                        temp = "开门中";
+                        break;
+                    case ElevatorDoorStatusEnum.Closing:
+                        temp = "关门中";
+                        break;
+                    default:
+                        break;
+                }
+                dr["DoorStatus"] = temp;
+                dr["HasException"] = el.HasException;
+                dt.Rows.Add(dr);
+            }
+            gridStatus.Invoke(new Action(() =>
+            {
+                for (int i = 0; i < elevators.Count; i++)
+                {
+                    VMIController el = elevators[i];
+                    if (el.HasException)
+                    {
+                        gridStatus.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+                gridStatus.AutoGenerateColumns = false;
+                gridStatus.DataSource = dt;
+                gridStatus.ClearSelection();
+            }));
+            
+        }
+
+        private void gridStatus_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            bool hasException = Convert.ToBoolean(gridStatus.Rows[e.RowIndex].Cells["colHasException"].Value.ToString());
+            if (hasException)
+            {
+                gridStatus.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
             }
         }
     }

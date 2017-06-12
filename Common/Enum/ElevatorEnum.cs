@@ -20,6 +20,7 @@ namespace Common.Enum
         Unknown = 0,
         Up = 1,
         Down = 2,
+        Stop = 3
     }
 
     public enum ElevatorControlModeEnum

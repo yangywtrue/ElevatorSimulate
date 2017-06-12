@@ -1,9 +1,9 @@
-﻿using Qisda.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility;
 
 namespace DTO
 {
@@ -94,24 +94,7 @@ namespace DTO
                 data = data.Substring(1, data.Length - 4);
             }
 
-            int sum = 0;
-            foreach (char chr in data.ToCharArray())
-            {
-                if (chr == '\t')
-                {
-                    continue;
-                }
-                sum += QStrings.Asc(chr.ToString());
-            }
-            string hex = Convert.ToString(sum, 16);
-            if (hex.Length >= 2)
-            {
-                return hex.Substring(hex.Length - 2, 2).ToUpper();
-            }
-            else
-            {
-                return hex.ToUpper();
-            }
+            return MessageHelper.CalcCheckSum(data);
         }
     }
 }

@@ -58,6 +58,11 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.gbMessage = new System.Windows.Forms.GroupBox();
             this.richTextMsg = new System.Windows.Forms.RichTextBox();
+            this.colDeviceCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCurrentFloor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRunningDirction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDoorStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHasException = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -85,7 +90,7 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.gbMessage);
             this.splitContainer.Size = new System.Drawing.Size(819, 600);
-            this.splitContainer.SplitterDistance = 383;
+            this.splitContainer.SplitterDistance = 398;
             this.splitContainer.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -104,7 +109,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.72727F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 156F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 267F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(383, 600);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(398, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gbBasic
@@ -116,7 +121,7 @@
             this.gbBasic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbBasic.Location = new System.Drawing.Point(3, 3);
             this.gbBasic.Name = "gbBasic";
-            this.gbBasic.Size = new System.Drawing.Size(377, 86);
+            this.gbBasic.Size = new System.Drawing.Size(393, 86);
             this.gbBasic.TabIndex = 0;
             this.gbBasic.TabStop = false;
             this.gbBasic.Text = "基本配置";
@@ -173,7 +178,7 @@
             this.gbOperation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOperation.Location = new System.Drawing.Point(3, 179);
             this.gbOperation.Name = "gbOperation";
-            this.gbOperation.Size = new System.Drawing.Size(377, 150);
+            this.gbOperation.Size = new System.Drawing.Size(393, 150);
             this.gbOperation.TabIndex = 1;
             this.gbOperation.TabStop = false;
             this.gbOperation.Text = "电梯操作";
@@ -186,6 +191,7 @@
             this.btnExceptionOff.TabIndex = 12;
             this.btnExceptionOff.Text = "取消异常";
             this.btnExceptionOff.UseVisualStyleBackColor = true;
+            this.btnExceptionOff.Click += new System.EventHandler(this.btnExceptionOff_Click);
             // 
             // btnExceptionOn
             // 
@@ -195,6 +201,7 @@
             this.btnExceptionOn.TabIndex = 11;
             this.btnExceptionOn.Text = "发生异常";
             this.btnExceptionOn.UseVisualStyleBackColor = true;
+            this.btnExceptionOn.Click += new System.EventHandler(this.btnExceptionOn_Click);
             // 
             // lblException
             // 
@@ -213,6 +220,7 @@
             this.btnClose.TabIndex = 9;
             this.btnClose.Text = "关门";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnOpenDoor
             // 
@@ -222,6 +230,7 @@
             this.btnOpenDoor.TabIndex = 8;
             this.btnOpenDoor.Text = "开门";
             this.btnOpenDoor.UseVisualStyleBackColor = true;
+            this.btnOpenDoor.Click += new System.EventHandler(this.btnOpenDoor_Click);
             // 
             // lblDoor
             // 
@@ -249,6 +258,7 @@
             this.btnFloor4.TabIndex = 5;
             this.btnFloor4.Text = "四楼";
             this.btnFloor4.UseVisualStyleBackColor = true;
+            this.btnFloor4.Click += new System.EventHandler(this.btnFloor4_Click);
             // 
             // btnFloor3
             // 
@@ -258,6 +268,7 @@
             this.btnFloor3.TabIndex = 4;
             this.btnFloor3.Text = "三楼";
             this.btnFloor3.UseVisualStyleBackColor = true;
+            this.btnFloor3.Click += new System.EventHandler(this.btnFloor3_Click);
             // 
             // btnFloor2
             // 
@@ -267,6 +278,7 @@
             this.btnFloor2.TabIndex = 3;
             this.btnFloor2.Text = "二楼";
             this.btnFloor2.UseVisualStyleBackColor = true;
+            this.btnFloor2.Click += new System.EventHandler(this.btnFloor2_Click);
             // 
             // btnFloor1
             // 
@@ -276,6 +288,7 @@
             this.btnFloor1.TabIndex = 2;
             this.btnFloor1.Text = "一楼";
             this.btnFloor1.UseVisualStyleBackColor = true;
+            this.btnFloor1.Click += new System.EventHandler(this.btnFloor1_Click);
             // 
             // cbDeviceCode
             // 
@@ -301,20 +314,34 @@
             this.gbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbStatus.Location = new System.Drawing.Point(3, 335);
             this.gbStatus.Name = "gbStatus";
-            this.gbStatus.Size = new System.Drawing.Size(377, 262);
+            this.gbStatus.Size = new System.Drawing.Size(393, 262);
             this.gbStatus.TabIndex = 2;
             this.gbStatus.TabStop = false;
             this.gbStatus.Text = "状态";
             // 
             // gridStatus
             // 
+            this.gridStatus.AllowUserToAddRows = false;
+            this.gridStatus.AllowUserToDeleteRows = false;
             this.gridStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colDeviceCode,
+            this.colCurrentFloor,
+            this.colRunningDirction,
+            this.colDoorStatus,
+            this.colHasException});
             this.gridStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridStatus.Enabled = false;
             this.gridStatus.Location = new System.Drawing.Point(3, 17);
+            this.gridStatus.MultiSelect = false;
             this.gridStatus.Name = "gridStatus";
+            this.gridStatus.ReadOnly = true;
+            this.gridStatus.RowHeadersVisible = false;
             this.gridStatus.RowTemplate.Height = 23;
-            this.gridStatus.Size = new System.Drawing.Size(371, 242);
+            this.gridStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridStatus.Size = new System.Drawing.Size(387, 242);
             this.gridStatus.TabIndex = 0;
+            this.gridStatus.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridStatus_RowPrePaint);
             // 
             // gbElevatorInit
             // 
@@ -325,7 +352,7 @@
             this.gbElevatorInit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbElevatorInit.Location = new System.Drawing.Point(3, 95);
             this.gbElevatorInit.Name = "gbElevatorInit";
-            this.gbElevatorInit.Size = new System.Drawing.Size(377, 78);
+            this.gbElevatorInit.Size = new System.Drawing.Size(393, 78);
             this.gbElevatorInit.TabIndex = 3;
             this.gbElevatorInit.TabStop = false;
             this.gbElevatorInit.Text = "初始化";
@@ -376,7 +403,7 @@
             this.gbMessage.Location = new System.Drawing.Point(0, 0);
             this.gbMessage.Name = "gbMessage";
             this.gbMessage.Padding = new System.Windows.Forms.Padding(5, 3, 5, 5);
-            this.gbMessage.Size = new System.Drawing.Size(432, 600);
+            this.gbMessage.Size = new System.Drawing.Size(417, 600);
             this.gbMessage.TabIndex = 0;
             this.gbMessage.TabStop = false;
             this.gbMessage.Text = "信息日志";
@@ -387,9 +414,49 @@
             this.richTextMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextMsg.Location = new System.Drawing.Point(5, 17);
             this.richTextMsg.Name = "richTextMsg";
-            this.richTextMsg.Size = new System.Drawing.Size(422, 578);
+            this.richTextMsg.Size = new System.Drawing.Size(407, 578);
             this.richTextMsg.TabIndex = 1;
             this.richTextMsg.Text = "";
+            // 
+            // colDeviceCode
+            // 
+            this.colDeviceCode.DataPropertyName = "DeviceCode";
+            this.colDeviceCode.FillWeight = 50F;
+            this.colDeviceCode.HeaderText = "编码";
+            this.colDeviceCode.Name = "colDeviceCode";
+            this.colDeviceCode.ReadOnly = true;
+            this.colDeviceCode.Width = 55;
+            // 
+            // colCurrentFloor
+            // 
+            this.colCurrentFloor.DataPropertyName = "CurrentFloor";
+            this.colCurrentFloor.HeaderText = "当前楼层";
+            this.colCurrentFloor.Name = "colCurrentFloor";
+            this.colCurrentFloor.ReadOnly = true;
+            this.colCurrentFloor.Width = 80;
+            // 
+            // colRunningDirction
+            // 
+            this.colRunningDirction.DataPropertyName = "RunningDirction";
+            this.colRunningDirction.HeaderText = "运行方向";
+            this.colRunningDirction.Name = "colRunningDirction";
+            this.colRunningDirction.ReadOnly = true;
+            this.colRunningDirction.Width = 80;
+            // 
+            // colDoorStatus
+            // 
+            this.colDoorStatus.DataPropertyName = "DoorStatus";
+            this.colDoorStatus.HeaderText = "电梯门状态";
+            this.colDoorStatus.Name = "colDoorStatus";
+            this.colDoorStatus.ReadOnly = true;
+            // 
+            // colHasException
+            // 
+            this.colHasException.DataPropertyName = "HasException";
+            this.colHasException.HeaderText = "Column1";
+            this.colHasException.Name = "colHasException";
+            this.colHasException.ReadOnly = true;
+            this.colHasException.Visible = false;
             // 
             // Simulate
             // 
@@ -450,6 +517,11 @@
         private System.Windows.Forms.Label lblDeviceCode;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeviceCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCurrentFloor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRunningDirction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDoorStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHasException;
     }
 }
 

@@ -18,10 +18,18 @@ namespace DTO
                 return Floors.Where(p => p.Value == true).Select(p => p.Key).FirstOrDefault();
             }
         }
-        public bool HasException { get; private set; } = false;
-        public ElevatorDoorStatusEnum DoorStatus { get; private set; } = ElevatorDoorStatusEnum.Closed;
-        public ElevatorDirectionEnum RunningDirection { get; private set; } = ElevatorDirectionEnum.Unknown;
-        public ElevatorControlModeEnum ControlMode { get; private set; } = ElevatorControlModeEnum.Automation;
+        public bool HasException { get; set; } = false;
+        public ElevatorDoorStatusEnum DoorStatus { get; set; } = ElevatorDoorStatusEnum.Closed;
+        public ElevatorDirectionEnum RunningDirection { get; set; } = ElevatorDirectionEnum.Unknown;
+        public ElevatorControlModeEnum ControlMode { get; set; } = ElevatorControlModeEnum.Automation;
+
+        public int TopFloor
+        {
+            get
+            {
+                return this.Floors.Keys.Last();
+            }
+        }
 
         public Dictionary<int, bool> Floors { get; } = new Dictionary<int, bool>()
         {
