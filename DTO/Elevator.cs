@@ -34,7 +34,9 @@ namespace DTO
         public Dictionary<int, bool> Floors { get; } = new Dictionary<int, bool>()
         {
             [1] = true,
-            [2] = false
+            [2] = false,
+            [3] = false,
+            [4] = false
         };
 
         public Elevator(string deviceCode)
